@@ -99,3 +99,10 @@ extension ContainerExtensions on Container {
         child: this,
       );
 }
+
+extension IntExtensions on int {
+  // create sizedbox with height
+  SizedBox get heightBox => SizedBox(
+        height: toDouble(),
+      );
+}

@@ -1,7 +1,7 @@
 class Person {
   int? birthYear;
   int? deathYear;
-  String name;
+  String? name;
 
   Person({
     required this.name,
@@ -27,18 +27,34 @@ class Person {
 }
 
 class Format {
-  Map<String, String> formats;
+  final String textHtml;
+  final String applicationEpubZip;
+  final String applicationMobipocketEbook;
+  final String applicationRdfXml;
+  final String imageJpeg;
+  final String textPlainCharsetUsAscii;
+  final String applicationOctetStream;
 
-  Format(this.formats);
+  Format({
+    required this.textHtml,
+    required this.applicationEpubZip,
+    required this.applicationMobipocketEbook,
+    required this.applicationRdfXml,
+    required this.imageJpeg,
+    required this.textPlainCharsetUsAscii,
+    required this.applicationOctetStream,
+  });
 
   factory Format.fromJson(Map<String, dynamic> json) {
     return Format(
-      Map<String, String>.from(json),
+      textHtml: json['text/html'] ?? '',
+      applicationEpubZip: json['application/epub+zip'] ?? '',
+      applicationMobipocketEbook: json['application/x-mobipocket-ebook'] ?? '',
+      applicationRdfXml: json['application/rdf+xml'] ?? '',
+      imageJpeg: json['image/jpeg'] ?? '',
+      textPlainCharsetUsAscii: json['text/plain; charset=us-ascii'] ?? '',
+      applicationOctetStream: json['application/octet-stream'] ?? '',
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    return formats;
   }
 }
 
@@ -71,33 +87,46 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
-      id: json['id'],
-      title: json['title'],
-      subjects: List<String>.from(json['subjects']),
-      authors: List<Person>.from(json['authors'].map((e) => Person.fromJson(e))),
-      translators: List<Person>.from(json['translators'].map((e) => Person.fromJson(e))),
-      bookshelves: List<String>.from(json['bookshelves']),
-      languages: List<String>.from(json['languages']),
-      copyright: json['copyright'],
-      mediaType: json['media_type'],
-      formats: Format.fromJson(json['formats']),
-      downloadCount: json['download_count'],
+      id: json['id'] ?? 0,
+      title: json['title'] ?? '',
+      subjects: json['subjects'] != null ? List<String>.from(json['subjects']) : [],
+      authors: json['authors'] != null ? List<Person>.from(json['authors'].map((e) => Person.fromJson(e))) : [],
+      translators:
+          json['translators'] != null ? List<Person>.from(json['translators'].map((e) => Person.fromJson(e))) : [],
+      bookshelves: json['bookshelves'] != null ? List<String>.from(json['bookshelves']) : [],
+      languages: json['languages'] != null ? List<String>.from(json['languages']) : [],
+      copyright: json['copyright'] ?? false,
+      mediaType: json['media_type'] ?? '',
+      formats: json['formats'] != null
+          ? Format.fromJson(json['formats'])
+          : Format(
+              textHtml: '',
+              applicationEpubZip: '',
+              applicationMobipocketEbook: '',
+              applicationRdfXml: '',
+              imageJpeg: '',
+              textPlainCharsetUsAscii: '',
+              applicationOctetStream: '',
+            ),
+      downloadCount: json['download_count'] ?? 0,
     );
   }
+}
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'title': title,
-      'subjects': subjects,
-      'authors': authors.map((e) => e.toJson()).toList(),
-      'translators': translators.map((e) => e.toJson()).toList(),
-      'bookshelves': bookshelves,
-      'languages': languages,
-      'copyright': copyright,
-      'media_type': mediaType,
-      'formats': formats.toJson(),
-      'download_count': downloadCount,
-    };
+class BookList {
+  List<Book> books;
+  int count;
+  String? next;
+  String? previous;
+
+  BookList({required this.books, required this.count, this.next, this.previous});
+
+  factory BookList.fromJson(Map<String, dynamic> json) {
+    return BookList(
+      books: List<Book>.from(json['results'].map((e) => Book.fromJson(e))),
+      count: json['count'],
+      next: json['next'],
+      previous: json['previous'],
+    );
   }
 }

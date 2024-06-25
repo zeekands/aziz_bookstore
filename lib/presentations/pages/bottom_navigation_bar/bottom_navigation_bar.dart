@@ -26,7 +26,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
       body: SizedBox.expand(
         child: PageView(
           controller: _pageController,
-          physics: const BouncingScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           onPageChanged: (index) {
             setState(() => _selected = index);
           },

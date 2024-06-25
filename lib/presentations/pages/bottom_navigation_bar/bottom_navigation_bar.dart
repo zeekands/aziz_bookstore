@@ -62,15 +62,15 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
               icon_active: 'assets/icons/ic_home_active.svg',
               icon_inactive: 'assets/icons/ic_home_inactive.svg'),
           CustomBottomBarItems(
-              label: 'Promo',
+              label: 'Explore',
               icon_active: 'assets/icons/ic_explore_active.svg',
               icon_inactive: 'assets/icons/ic_explore_inactive.svg'),
           CustomBottomBarItems(
-              label: 'Kategori',
+              label: 'Liked',
               icon_active: 'assets/icons/ic_liked_active.svg',
               icon_inactive: 'assets/icons/ic_liked_inactive.svg'),
           CustomBottomBarItems(
-            label: 'Wishlist',
+            label: 'Profile',
             icon_active: 'assets/icons/ic_profile_active.svg',
             icon_inactive: 'assets/icons/ic_profile_inactive.svg',
           ),

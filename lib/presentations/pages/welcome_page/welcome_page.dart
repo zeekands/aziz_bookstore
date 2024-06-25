@@ -41,7 +41,7 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
             ElevatedButton(
               onPressed: () {
-                context.pushNamed(AppPaths.home);
+                context.pushReplacementNamed(AppPaths.home);
               },
               child: Text(
                 'Get Started',

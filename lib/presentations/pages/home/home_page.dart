@@ -56,206 +56,214 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              CarouselSlider(
-                options: CarouselOptions(
-                  aspectRatio: 16 / 9,
-                  viewportFraction: 1,
-                  initialPage: 0,
-                  enableInfiniteScroll: true,
-                  reverse: false,
-                  autoPlay: true,
-                  autoPlayInterval: const Duration(seconds: 5),
-                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
-                  autoPlayCurve: Curves.fastOutSlowIn,
-                  enlargeCenterPage: true,
+        child: RefreshIndicator(
+          onRefresh: () async {
+            context.read<GetListBookCubit>().getBooks();
+            context.read<GetListNewReleaseCubit>().getNewReleaseBook();
+            context.read<GetListEngBookCubit>().getEngBooks();
+            context.read<GetListLoveThemeCubit>().getLoveThemeBooks();
+          },
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CarouselSlider(
+                  options: CarouselOptions(
+                    aspectRatio: 16 / 9,
+                    viewportFraction: 1,
+                    initialPage: 0,
+                    enableInfiniteScroll: true,
+                    reverse: false,
+                    autoPlay: true,
+                    autoPlayInterval: const Duration(seconds: 5),
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
+                    autoPlayCurve: Curves.fastOutSlowIn,
+                    enlargeCenterPage: true,
+                  ),
+                  items: listBanner.map((i) {
+                    return Image.asset(
+                      i,
+                      fit: BoxFit.cover,
+                    );
+                  }).toList(),
                 ),
-                items: listBanner.map((i) {
-                  return Image.asset(
-                    i,
-                    fit: BoxFit.cover,
-                  );
-                }).toList(),
-              ),
-              Container(
-                width: double.infinity,
-                height: 250,
-                decoration: const BoxDecoration(color: Color(0xffF6A6B5)),
-                padding: const EdgeInsets.only(),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Enjoy Your Love Theme Books',
-                      style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600, color: cMainWhite),
-                    ).paddingSymmetric(horizontal: 16),
-                    8.heightBox,
-                    BlocBuilder<GetListLoveThemeCubit, GetListLoveThemeState>(
-                      builder: (context, state) {
-                        return state.maybeWhen(
-                          orElse: () {
-                            return const ListBookHomePlaceholder();
-                          },
-                          loaded: (books) => SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                for (var book in books.books)
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      color: cMainWhite,
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.black.withOpacity(0.1599999964237213),
-                                          blurRadius: 4,
-                                          offset: const Offset(0, 2),
-                                        ),
-                                      ],
-                                    ),
-                                    width: 100,
-                                    margin: const EdgeInsets.only(right: 8),
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius: const BorderRadius.only(
-                                            topLeft: Radius.circular(8),
-                                            topRight: Radius.circular(8),
+                Container(
+                  width: double.infinity,
+                  height: 250,
+                  decoration: const BoxDecoration(color: Color(0xffF6A6B5)),
+                  padding: const EdgeInsets.only(),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Enjoy Your Love Theme Books',
+                        style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600, color: cMainWhite),
+                      ).paddingSymmetric(horizontal: 16),
+                      8.heightBox,
+                      BlocBuilder<GetListLoveThemeCubit, GetListLoveThemeState>(
+                        builder: (context, state) {
+                          return state.maybeWhen(
+                            orElse: () {
+                              return const ListBookHomePlaceholder();
+                            },
+                            loaded: (books) => SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  for (var book in books.books)
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        color: cMainWhite,
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.black.withOpacity(0.1599999964237213),
+                                            blurRadius: 4,
+                                            offset: const Offset(0, 2),
                                           ),
-                                          child: Image.network(
-                                            book.formats.imageJpeg,
-                                            height: 150,
-                                            width: 100,
-                                            fit: BoxFit.cover,
-                                            errorBuilder: (context, error, stackTrace) {
-                                              return Container(
-                                                height: 150,
-                                                width: 100,
-                                                color: Colors.grey[300],
-                                              );
-                                            },
+                                        ],
+                                      ),
+                                      width: 100,
+                                      margin: const EdgeInsets.only(right: 8),
+                                      child: Column(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius: const BorderRadius.only(
+                                              topLeft: Radius.circular(8),
+                                              topRight: Radius.circular(8),
+                                            ),
+                                            child: Image.network(
+                                              book.formats.imageJpeg,
+                                              height: 150,
+                                              width: 100,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error, stackTrace) {
+                                                return Container(
+                                                  height: 150,
+                                                  width: 100,
+                                                  color: Colors.grey[300],
+                                                );
+                                              },
+                                            ),
                                           ),
-                                        ),
-                                        4.heightBox,
-                                        Text(
-                                          "${book.title}\n",
-                                          style: context.bodySmallTextStyle
-                                              ?.copyWith(fontWeight: FontWeight.w600, color: cMainBlack),
-                                          maxLines: 2,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.center,
-                                        ).paddingSymmetric(horizontal: 8, vertical: 4),
-                                      ],
+                                          4.heightBox,
+                                          Text(
+                                            "${book.title}\n",
+                                            style: context.bodySmallTextStyle
+                                                ?.copyWith(fontWeight: FontWeight.w600, color: cMainBlack),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
+                                            textAlign: TextAlign.center,
+                                          ).paddingSymmetric(horizontal: 8, vertical: 4),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                              ],
-                            ).paddingSymmetric(horizontal: 8),
-                          ),
-                          error: (message) => Text(message.message),
-                        );
+                                ],
+                              ).paddingSymmetric(horizontal: 8),
+                            ),
+                            error: (message) => Text(message.message),
+                          );
+                        },
+                      ),
+                    ],
+                  ),
+                ),
+                12.heightBox,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child:
+                      Text('Popular Books', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
+                ),
+                8.heightBox,
+                BlocBuilder<GetListBookCubit, GetListBookState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () {
+                        return const ListBookHomePlaceholder();
                       },
-                    ),
-                  ],
+                      loaded: (books) => SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var book in books.books) ItemBook(book: book),
+                          ],
+                        ),
+                      ),
+                      error: (message) => Text(message.message),
+                    );
+                  },
                 ),
-              ),
-              12.heightBox,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child:
-                    Text('Popular Books', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
-              ),
-              8.heightBox,
-              BlocBuilder<GetListBookCubit, GetListBookState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () {
-                      return const ListBookHomePlaceholder();
-                    },
-                    loaded: (books) => SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (var book in books.books) ItemBook(book: book),
-                        ],
-                      ),
-                    ),
-                    error: (message) => Text(message.message),
-                  );
-                },
-              ),
-              12.heightBox,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text('Fresh Books For You!',
-                    style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
-              ),
-              8.heightBox,
-              BlocBuilder<GetListNewReleaseCubit, GetListNewReleaseState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () {
-                      return const ListBookHomePlaceholder();
-                    },
-                    loaded: (books) => SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (var book in books.books) ItemBook(book: book),
-                        ],
-                      ),
-                    ),
-                    error: (message) => Text(message.message),
-                  );
-                },
-              ),
-              12.heightBox,
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  children: [
-                    Text('English Book', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
-                    const Spacer(),
-                    TextButton(
-                      onPressed: () {},
-                      child: const Text('See All'),
-                    ),
-                  ],
+                12.heightBox,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Text('Fresh Books For You!',
+                      style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
                 ),
-              ),
-              8.heightBox,
-              BlocBuilder<GetListEngBookCubit, GetListEngBookState>(
-                builder: (context, state) {
-                  return state.maybeWhen(
-                    orElse: () {
-                      return const ListBookHomePlaceholder();
-                    },
-                    loaded: (books) => SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          for (var book in books.books) ItemBook(book: book),
-                        ],
+                8.heightBox,
+                BlocBuilder<GetListNewReleaseCubit, GetListNewReleaseState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () {
+                        return const ListBookHomePlaceholder();
+                      },
+                      loaded: (books) => SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var book in books.books) ItemBook(book: book),
+                          ],
+                        ),
                       ),
-                    ),
-                    error: (message) => Text(message.message),
-                  );
-                },
-              ),
-            ],
+                      error: (message) => Text(message.message),
+                    );
+                  },
+                ),
+                12.heightBox,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Row(
+                    children: [
+                      Text('English Book', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: const Text('See All'),
+                      ),
+                    ],
+                  ),
+                ),
+                8.heightBox,
+                BlocBuilder<GetListEngBookCubit, GetListEngBookState>(
+                  builder: (context, state) {
+                    return state.maybeWhen(
+                      orElse: () {
+                        return const ListBookHomePlaceholder();
+                      },
+                      loaded: (books) => SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            for (var book in books.books) ItemBook(book: book),
+                          ],
+                        ),
+                      ),
+                      error: (message) => Text(message.message),
+                    );
+                  },
+                ),
+              ],
+            ),
           ),
         ),
       ),

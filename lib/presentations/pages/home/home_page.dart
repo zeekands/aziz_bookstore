@@ -11,17 +11,17 @@ import 'package:aziz_bookstore/presentations/components/list_book_home_placehold
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:redacted/redacted.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({super.key, this.goToExplorePage});
+
+  final Function()? goToExplorePage;
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   final listBanner = [
     "assets/images/1.jpg",
     "assets/images/2.jpg",
@@ -40,6 +40,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     darkStatusBar();
     return Scaffold(
       appBar: AppBar(
@@ -51,7 +52,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
-            onPressed: () {},
+            onPressed: widget.goToExplorePage,
           ),
         ],
       ),
@@ -89,17 +90,26 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Container(
                   width: double.infinity,
-                  height: 250,
                   decoration: const BoxDecoration(color: Color(0xffF6A6B5)),
-                  padding: const EdgeInsets.only(),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 16,
+                  ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'Enjoy Your Love Theme Books',
-                        style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600, color: cMainWhite),
-                      ).paddingSymmetric(horizontal: 16),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                        child: Row(
+                          children: [
+                            Text('Enjoy Sweets Romance',
+                                style: context.titleMediumTextStyle
+                                    ?.copyWith(fontWeight: FontWeight.w600, color: cMainWhite)),
+                            const Spacer(),
+                            Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainWhite)),
+                          ],
+                        ),
+                      ),
                       8.heightBox,
                       BlocBuilder<GetListLoveThemeCubit, GetListLoveThemeState>(
                         builder: (context, state) {
@@ -116,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                                   for (var book in books.books)
                                     Container(
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
+                                        borderRadius: BorderRadius.circular(4),
                                         color: cMainWhite,
                                         boxShadow: [
                                           BoxShadow(
@@ -134,8 +144,8 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           ClipRRect(
                                             borderRadius: const BorderRadius.only(
-                                              topLeft: Radius.circular(8),
-                                              topRight: Radius.circular(8),
+                                              topLeft: Radius.circular(4),
+                                              topRight: Radius.circular(4),
                                             ),
                                             child: Image.network(
                                               book.formats.imageJpeg,
@@ -151,15 +161,92 @@ class _HomePageState extends State<HomePage> {
                                               },
                                             ),
                                           ),
-                                          4.heightBox,
-                                          Text(
-                                            "${book.title}\n",
-                                            style: context.bodySmallTextStyle
-                                                ?.copyWith(fontWeight: FontWeight.w600, color: cMainBlack),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.center,
-                                          ).paddingSymmetric(horizontal: 8, vertical: 4),
+                                          Column(
+                                            mainAxisAlignment: MainAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              4.heightBox,
+                                              Builder(
+                                                builder: (context) {
+                                                  var languages = "";
+                                                  for (var language in book.languages) {
+                                                    languages += language;
+                                                  }
+                                                  return Container(
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.grey[200],
+                                                      borderRadius: BorderRadius.circular(4),
+                                                    ),
+                                                    padding: const EdgeInsets.symmetric(
+                                                      horizontal: 4,
+                                                    ),
+                                                    child: Text(
+                                                      languages,
+                                                      style: context.bodySmallTextStyle?.copyWith(
+                                                          fontWeight: FontWeight.w400,
+                                                          color: Colors.grey[500],
+                                                          fontSize: 10),
+                                                      maxLines: 1,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      textAlign: TextAlign.start,
+                                                    ),
+                                                  );
+                                                },
+                                              ),
+                                              4.heightBox,
+                                              Text(
+                                                "${book.title}\n",
+                                                style: context.bodySmallTextStyle
+                                                    ?.copyWith(fontWeight: FontWeight.w600, color: cMainBlack),
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                              ),
+                                              4.heightBox,
+                                              Builder(
+                                                builder: (context) {
+                                                  var authors = "";
+                                                  for (var author in book.authors) {
+                                                    authors += author.name ?? "" ", ";
+                                                  }
+                                                  return Text(
+                                                    authors,
+                                                    style: context.bodySmallTextStyle?.copyWith(
+                                                        fontWeight: FontWeight.w400,
+                                                        color: Colors.grey[500],
+                                                        fontSize: 10),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.start,
+                                                  );
+                                                },
+                                              ),
+                                              4.heightBox,
+                                              Row(
+                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Icon(
+                                                    Icons.download,
+                                                    color: Colors.grey[500],
+                                                    size: 13,
+                                                  ),
+                                                  4.widthBox,
+                                                  Text(
+                                                    book.downloadCount.toString(),
+                                                    style: context.bodySmallTextStyle?.copyWith(
+                                                        fontWeight: FontWeight.w400,
+                                                        color: Colors.grey[500],
+                                                        fontSize: 10),
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.start,
+                                                  ),
+                                                ],
+                                              ),
+                                              4.heightBox,
+                                            ],
+                                          ).paddingSymmetric(horizontal: 4),
                                         ],
                                       ),
                                     ),
@@ -175,9 +262,14 @@ class _HomePageState extends State<HomePage> {
                 ),
                 12.heightBox,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child:
-                      Text('Popular Books', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      Text('Popular Book', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
+                      const Spacer(),
+                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)),
+                    ],
+                  ),
                 ),
                 8.heightBox,
                 BlocBuilder<GetListBookCubit, GetListBookState>(
@@ -202,9 +294,15 @@ class _HomePageState extends State<HomePage> {
                 ),
                 12.heightBox,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text('Fresh Books For You!',
-                      style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Row(
+                    children: [
+                      Text('Fresh Book For You!',
+                          style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
+                      const Spacer(),
+                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)),
+                    ],
+                  ),
                 ),
                 8.heightBox,
                 BlocBuilder<GetListNewReleaseCubit, GetListNewReleaseState>(
@@ -229,15 +327,12 @@ class _HomePageState extends State<HomePage> {
                 ),
                 12.heightBox,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
                   child: Row(
                     children: [
                       Text('English Book', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
                       const Spacer(),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('See All'),
-                      ),
+                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)),
                     ],
                   ),
                 ),
@@ -262,6 +357,7 @@ class _HomePageState extends State<HomePage> {
                     );
                   },
                 ),
+                12.heightBox,
               ],
             ),
           ),
@@ -269,4 +365,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

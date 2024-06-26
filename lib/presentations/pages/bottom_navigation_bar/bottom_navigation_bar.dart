@@ -1,9 +1,9 @@
 import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/core/theme/status_bar_color.dart';
 import 'package:aziz_bookstore/presentations/components/bottom_navbar.dart';
+import 'package:aziz_bookstore/presentations/pages/explore_page/explore_page.dart';
 import 'package:aziz_bookstore/presentations/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 class BottomNavBarPage extends StatefulWidget {
   const BottomNavBarPage({Key? key}) : super(key: key);
@@ -16,27 +16,25 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
   int _selected = 0;
   final transitionDuration = const Duration(milliseconds: 200);
 
-  final PageController _pageController = PageController(initialPage: 0, keepPage: true);
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     darkStatusBar();
     return Scaffold(
-      body: SizedBox.expand(
-        child: PageView(
-          controller: _pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          onPageChanged: (index) {
-            setState(() => _selected = index);
-          },
-          children: [
-            const HomePage(),
-            Container(),
-            Container(),
-            Container(),
-          ],
-        ),
+      body: IndexedStack(
+        index: _selected,
+        children: [
+          HomePage(
+            goToExplorePage: () {
+              setState(() {
+                _selected = 1;
+              });
+            },
+          ),
+          const ExplorePage(),
+          Container(),
+          Container(),
+        ],
       ),
       bottomNavigationBar: CustomLineIndicatorBottomNavbar(
         selectedColor: cMainPurple,
@@ -47,9 +45,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
         selectedIconSize: 20,
         onTap: (index) {
           setState(() {
-            _pageController.jumpToPage(
-              index,
-            );
             _selected = index;
           });
         },
@@ -81,57 +76,4 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
 
   @override
   bool get wantKeepAlive => true;
-}
-
-class IconBottomBar extends StatelessWidget {
-  final String name;
-  final String iconActive;
-  final String iconInactive;
-  final bool selected;
-  final Function() onPressed;
-
-  const IconBottomBar(
-      {super.key,
-      required this.name,
-      required this.iconActive,
-      required this.iconInactive,
-      required this.selected,
-      required this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPressed,
-      child: Stack(children: [
-        Positioned(
-          top: -4,
-          child: Container(
-            height: 5,
-            width: 50,
-            color: Colors.blue,
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              selected ? iconActive : iconInactive,
-              height: 24,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Text(
-              name,
-              style: TextStyle(
-                color: selected ? Colors.red : Colors.grey,
-                fontWeight: FontWeight.bold,
-                fontSize: 12,
-              ),
-            )
-          ],
-        ),
-      ]),
-    );
-  }
 }

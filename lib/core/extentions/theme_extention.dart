@@ -30,23 +30,17 @@ extension ThemeDtx on BuildContext {
 
   Color get colorSchemeSurface => colorScheme.surface;
 
-  Color get colorSchemeSurfaceVariant => colorScheme.surfaceVariant;
-
   Color get colorSchemeSurfaceTint => colorScheme.surfaceTint;
 
   Color get colorSchemeShadow => colorScheme.shadow;
 
   Color get colorSchemeOutline => colorScheme.outline;
 
-  Color get colorSchemeBackground => colorScheme.background;
-
   Color get colorSchemeError => colorScheme.error;
 
   Color get colorSchemeOnPrimary => colorScheme.onPrimary;
 
   Color get colorSchemeOnSecondary => colorScheme.onSecondary;
-
-  Color get colorSchemeOnBackground => colorScheme.onBackground;
 
   Color get colorSchemeOnSurface => colorScheme.onSurface;
 
@@ -103,8 +97,6 @@ extension ThemeDtx on BuildContext {
   bool get isDarkBrightness => theme.brightness == Brightness.dark;
 
   bool get isLightBrightness => theme.brightness == Brightness.light;
-
-  Color get backgroundColor => theme.colorScheme.background;
 
   Color get primaryColor => theme.primaryColor;
 
@@ -172,8 +164,6 @@ extension ThemeDtx on BuildContext {
     'Use labelSmall instead. '
     'This feature was deprecated after Flutter v3.1.0-0.0.pre.',
   )
-  TextStyle? get overlinePrimaryTextStyle => primaryTextTheme.overline;
-
   TextStyle? get displayLargeTextStyle => textTheme.displayLarge;
 
   TextStyle? get displayMediumTextStyle => textTheme.displayMedium;

@@ -46,12 +46,76 @@ class ItemBook extends StatelessWidget {
             ),
           ),
           4.heightBox,
+          Builder(
+            builder: (context) {
+              var languages = "";
+              for (var language in book?.languages ?? []) {
+                languages += language ?? "" ", ";
+              }
+              return Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 4,
+                ),
+                child: Text(
+                  languages,
+                  style: context.bodySmallTextStyle
+                      ?.copyWith(fontWeight: FontWeight.w400, color: Colors.grey[500], fontSize: 10),
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  textAlign: TextAlign.start,
+                ),
+              );
+            },
+          ),
+          4.heightBox,
           Text(
             book?.title ?? 'Placeholder',
             style: context.bodySmallTextStyle?.copyWith(fontWeight: FontWeight.w600, color: textColor ?? cMainBlack),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.start,
+          ),
+          4.heightBox,
+          Builder(
+            builder: (context) {
+              var authors = "";
+              for (var author in book!.authors) {
+                authors += author.name ?? "" ", ";
+              }
+              return Text(
+                authors,
+                style: context.bodySmallTextStyle
+                    ?.copyWith(fontWeight: FontWeight.w400, color: Colors.grey[500], fontSize: 10),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.start,
+              );
+            },
+          ),
+          4.heightBox,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Icon(
+                Icons.download,
+                color: Colors.grey[500],
+                size: 13,
+              ),
+              4.widthBox,
+              Text(
+                book?.downloadCount.toString() ?? '0',
+                style: context.bodySmallTextStyle
+                    ?.copyWith(fontWeight: FontWeight.w400, color: Colors.grey[500], fontSize: 10),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.start,
+              ),
+            ],
           ),
         ],
       ),

@@ -6,6 +6,7 @@ import 'dart:math' as math;
 import 'dart:typed_data';
 
 final HttpService httpService = locator<HttpService>();
+CancelToken cancelToken = CancelToken();
 
 class HttpService {
   static final HttpService _instance = HttpService._internal();

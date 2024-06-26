@@ -7,6 +7,7 @@ import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_book_cubit.dart
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_eng_book/get_list_eng_book_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_love_theme/get_list_love_theme_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_new_release/get_list_new_release_cubit.dart';
+import 'package:aziz_bookstore/presentations/bloc/cubit/search_book/search_book_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 final locator = GetIt.instance;
@@ -17,6 +18,7 @@ Future<void> setupLocator() async {
   locator.registerFactory(() => GetListEngBookCubit(locator()));
   locator.registerFactory(() => GetListNewReleaseCubit(locator()));
   locator.registerFactory(() => GetListLoveThemeCubit(locator()));
+  locator.registerFactory(() => SearchBookCubit(locator()));
 
   // usecase
   locator.registerLazySingleton(() => GetListBookUsecae(locator()));

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_list_love_theme_cubit.dart';
+part of 'search_book_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,13 +15,16 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetListLoveThemeState {
+mixin _$SearchBookState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(BookList books) loaded,
-    required TResult Function(Failure failure) error,
+    required TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)
+        loadMore,
+    required TResult Function(Failure message) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,7 +32,10 @@ mixin _$GetListLoveThemeState {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(BookList books)? loaded,
-    TResult? Function(Failure failure)? error,
+    TResult? Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult? Function(Failure message)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,7 +43,10 @@ mixin _$GetListLoveThemeState {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(BookList books)? loaded,
-    TResult Function(Failure failure)? error,
+    TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult Function(Failure message)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -46,6 +55,7 @@ mixin _$GetListLoveThemeState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -54,6 +64,7 @@ mixin _$GetListLoveThemeState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -62,6 +73,7 @@ mixin _$GetListLoveThemeState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) =>
@@ -69,17 +81,16 @@ mixin _$GetListLoveThemeState {
 }
 
 /// @nodoc
-abstract class $GetListLoveThemeStateCopyWith<$Res> {
-  factory $GetListLoveThemeStateCopyWith(GetListLoveThemeState value,
-          $Res Function(GetListLoveThemeState) then) =
-      _$GetListLoveThemeStateCopyWithImpl<$Res, GetListLoveThemeState>;
+abstract class $SearchBookStateCopyWith<$Res> {
+  factory $SearchBookStateCopyWith(
+          SearchBookState value, $Res Function(SearchBookState) then) =
+      _$SearchBookStateCopyWithImpl<$Res, SearchBookState>;
 }
 
 /// @nodoc
-class _$GetListLoveThemeStateCopyWithImpl<$Res,
-        $Val extends GetListLoveThemeState>
-    implements $GetListLoveThemeStateCopyWith<$Res> {
-  _$GetListLoveThemeStateCopyWithImpl(this._value, this._then);
+class _$SearchBookStateCopyWithImpl<$Res, $Val extends SearchBookState>
+    implements $SearchBookStateCopyWith<$Res> {
+  _$SearchBookStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -96,7 +107,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$SearchBookStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -105,12 +116,18 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
+class _$InitialImpl with DiagnosticableTreeMixin implements _Initial {
   const _$InitialImpl();
 
   @override
-  String toString() {
-    return 'GetListLoveThemeState.initial()';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SearchBookState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'SearchBookState.initial'));
   }
 
   @override
@@ -128,7 +145,10 @@ class _$InitialImpl implements _Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(BookList books) loaded,
-    required TResult Function(Failure failure) error,
+    required TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)
+        loadMore,
+    required TResult Function(Failure message) error,
   }) {
     return initial();
   }
@@ -139,7 +159,10 @@ class _$InitialImpl implements _Initial {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(BookList books)? loaded,
-    TResult? Function(Failure failure)? error,
+    TResult? Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult? Function(Failure message)? error,
   }) {
     return initial?.call();
   }
@@ -150,7 +173,10 @@ class _$InitialImpl implements _Initial {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(BookList books)? loaded,
-    TResult Function(Failure failure)? error,
+    TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult Function(Failure message)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -165,6 +191,7 @@ class _$InitialImpl implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Error value) error,
   }) {
     return initial(this);
@@ -176,6 +203,7 @@ class _$InitialImpl implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Error value)? error,
   }) {
     return initial?.call(this);
@@ -187,6 +215,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -197,7 +226,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements GetListLoveThemeState {
+abstract class _Initial implements SearchBookState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -210,7 +239,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$SearchBookStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -219,12 +248,18 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
+class _$LoadingImpl with DiagnosticableTreeMixin implements _Loading {
   const _$LoadingImpl();
 
   @override
-  String toString() {
-    return 'GetListLoveThemeState.loading()';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SearchBookState.loading()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'SearchBookState.loading'));
   }
 
   @override
@@ -242,7 +277,10 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(BookList books) loaded,
-    required TResult Function(Failure failure) error,
+    required TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)
+        loadMore,
+    required TResult Function(Failure message) error,
   }) {
     return loading();
   }
@@ -253,7 +291,10 @@ class _$LoadingImpl implements _Loading {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(BookList books)? loaded,
-    TResult? Function(Failure failure)? error,
+    TResult? Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult? Function(Failure message)? error,
   }) {
     return loading?.call();
   }
@@ -264,7 +305,10 @@ class _$LoadingImpl implements _Loading {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(BookList books)? loaded,
-    TResult Function(Failure failure)? error,
+    TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult Function(Failure message)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -279,6 +323,7 @@ class _$LoadingImpl implements _Loading {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Error value) error,
   }) {
     return loading(this);
@@ -290,6 +335,7 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Error value)? error,
   }) {
     return loading?.call(this);
@@ -301,6 +347,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -311,7 +358,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements GetListLoveThemeState {
+abstract class _Loading implements SearchBookState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -326,7 +373,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$SearchBookStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -348,15 +395,23 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
+class _$LoadedImpl with DiagnosticableTreeMixin implements _Loaded {
   const _$LoadedImpl(this.books);
 
   @override
   final BookList books;
 
   @override
-  String toString() {
-    return 'GetListLoveThemeState.loaded(books: $books)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SearchBookState.loaded(books: $books)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SearchBookState.loaded'))
+      ..add(DiagnosticsProperty('books', books));
   }
 
   @override
@@ -382,7 +437,10 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(BookList books) loaded,
-    required TResult Function(Failure failure) error,
+    required TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)
+        loadMore,
+    required TResult Function(Failure message) error,
   }) {
     return loaded(books);
   }
@@ -393,7 +451,10 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(BookList books)? loaded,
-    TResult? Function(Failure failure)? error,
+    TResult? Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult? Function(Failure message)? error,
   }) {
     return loaded?.call(books);
   }
@@ -404,7 +465,10 @@ class _$LoadedImpl implements _Loaded {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(BookList books)? loaded,
-    TResult Function(Failure failure)? error,
+    TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult Function(Failure message)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -419,6 +483,7 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Error value) error,
   }) {
     return loaded(this);
@@ -430,6 +495,7 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Error value)? error,
   }) {
     return loaded?.call(this);
@@ -441,6 +507,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -451,7 +518,7 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements GetListLoveThemeState {
+abstract class _Loaded implements SearchBookState {
   const factory _Loaded(final BookList books) = _$LoadedImpl;
 
   BookList get books;
@@ -461,17 +528,218 @@ abstract class _Loaded implements GetListLoveThemeState {
 }
 
 /// @nodoc
+abstract class _$$LoadMoreImplCopyWith<$Res> {
+  factory _$$LoadMoreImplCopyWith(
+          _$LoadMoreImpl value, $Res Function(_$LoadMoreImpl) then) =
+      __$$LoadMoreImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Book> moreBooks, bool showLoading, bool hasReachedMax});
+}
+
+/// @nodoc
+class __$$LoadMoreImplCopyWithImpl<$Res>
+    extends _$SearchBookStateCopyWithImpl<$Res, _$LoadMoreImpl>
+    implements _$$LoadMoreImplCopyWith<$Res> {
+  __$$LoadMoreImplCopyWithImpl(
+      _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? moreBooks = null,
+    Object? showLoading = null,
+    Object? hasReachedMax = null,
+  }) {
+    return _then(_$LoadMoreImpl(
+      null == moreBooks
+          ? _value._moreBooks
+          : moreBooks // ignore: cast_nullable_to_non_nullable
+              as List<Book>,
+      null == showLoading
+          ? _value.showLoading
+          : showLoading // ignore: cast_nullable_to_non_nullable
+              as bool,
+      null == hasReachedMax
+          ? _value.hasReachedMax
+          : hasReachedMax // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$LoadMoreImpl with DiagnosticableTreeMixin implements _LoadMore {
+  const _$LoadMoreImpl(
+      final List<Book> moreBooks, this.showLoading, this.hasReachedMax)
+      : _moreBooks = moreBooks;
+
+  final List<Book> _moreBooks;
+  @override
+  List<Book> get moreBooks {
+    if (_moreBooks is EqualUnmodifiableListView) return _moreBooks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_moreBooks);
+  }
+
+  @override
+  final bool showLoading;
+  @override
+  final bool hasReachedMax;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SearchBookState.loadMore(moreBooks: $moreBooks, showLoading: $showLoading, hasReachedMax: $hasReachedMax)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SearchBookState.loadMore'))
+      ..add(DiagnosticsProperty('moreBooks', moreBooks))
+      ..add(DiagnosticsProperty('showLoading', showLoading))
+      ..add(DiagnosticsProperty('hasReachedMax', hasReachedMax));
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadMoreImpl &&
+            const DeepCollectionEquality()
+                .equals(other._moreBooks, _moreBooks) &&
+            (identical(other.showLoading, showLoading) ||
+                other.showLoading == showLoading) &&
+            (identical(other.hasReachedMax, hasReachedMax) ||
+                other.hasReachedMax == hasReachedMax));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_moreBooks),
+      showLoading,
+      hasReachedMax);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$LoadMoreImplCopyWith<_$LoadMoreImpl> get copyWith =>
+      __$$LoadMoreImplCopyWithImpl<_$LoadMoreImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(BookList books) loaded,
+    required TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)
+        loadMore,
+    required TResult Function(Failure message) error,
+  }) {
+    return loadMore(moreBooks, showLoading, hasReachedMax);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(BookList books)? loaded,
+    TResult? Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult? Function(Failure message)? error,
+  }) {
+    return loadMore?.call(moreBooks, showLoading, hasReachedMax);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(BookList books)? loaded,
+    TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult Function(Failure message)? error,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(moreBooks, showLoading, hasReachedMax);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Loading value) loading,
+    required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadMore value) loadMore,
+    required TResult Function(_Error value) error,
+  }) {
+    return loadMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Loading value)? loading,
+    TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadMore value)? loadMore,
+    TResult? Function(_Error value)? error,
+  }) {
+    return loadMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Loading value)? loading,
+    TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadMore value)? loadMore,
+    TResult Function(_Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (loadMore != null) {
+      return loadMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _LoadMore implements SearchBookState {
+  const factory _LoadMore(final List<Book> moreBooks, final bool showLoading,
+      final bool hasReachedMax) = _$LoadMoreImpl;
+
+  List<Book> get moreBooks;
+  bool get showLoading;
+  bool get hasReachedMax;
+  @JsonKey(ignore: true)
+  _$$LoadMoreImplCopyWith<_$LoadMoreImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Failure failure});
+  $Res call({Failure message});
 }
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$SearchBookStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -480,12 +748,12 @@ class __$$ErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? failure = null,
+    Object? message = null,
   }) {
     return _then(_$ErrorImpl(
-      null == failure
-          ? _value.failure
-          : failure // ignore: cast_nullable_to_non_nullable
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
               as Failure,
     ));
   }
@@ -493,15 +761,23 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl(this.failure);
+class _$ErrorImpl with DiagnosticableTreeMixin implements _Error {
+  const _$ErrorImpl(this.message);
 
   @override
-  final Failure failure;
+  final Failure message;
 
   @override
-  String toString() {
-    return 'GetListLoveThemeState.error(failure: $failure)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'SearchBookState.error(message: $message)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'SearchBookState.error'))
+      ..add(DiagnosticsProperty('message', message));
   }
 
   @override
@@ -509,11 +785,11 @@ class _$ErrorImpl implements _Error {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ErrorImpl &&
-            (identical(other.failure, failure) || other.failure == failure));
+            (identical(other.message, message) || other.message == message));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, failure);
+  int get hashCode => Object.hash(runtimeType, message);
 
   @JsonKey(ignore: true)
   @override
@@ -527,9 +803,12 @@ class _$ErrorImpl implements _Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(BookList books) loaded,
-    required TResult Function(Failure failure) error,
+    required TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)
+        loadMore,
+    required TResult Function(Failure message) error,
   }) {
-    return error(failure);
+    return error(message);
   }
 
   @override
@@ -538,9 +817,12 @@ class _$ErrorImpl implements _Error {
     TResult? Function()? initial,
     TResult? Function()? loading,
     TResult? Function(BookList books)? loaded,
-    TResult? Function(Failure failure)? error,
+    TResult? Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult? Function(Failure message)? error,
   }) {
-    return error?.call(failure);
+    return error?.call(message);
   }
 
   @override
@@ -549,11 +831,14 @@ class _$ErrorImpl implements _Error {
     TResult Function()? initial,
     TResult Function()? loading,
     TResult Function(BookList books)? loaded,
-    TResult Function(Failure failure)? error,
+    TResult Function(
+            List<Book> moreBooks, bool showLoading, bool hasReachedMax)?
+        loadMore,
+    TResult Function(Failure message)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error(failure);
+      return error(message);
     }
     return orElse();
   }
@@ -564,6 +849,7 @@ class _$ErrorImpl implements _Error {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Loading value) loading,
     required TResult Function(_Loaded value) loaded,
+    required TResult Function(_LoadMore value) loadMore,
     required TResult Function(_Error value) error,
   }) {
     return error(this);
@@ -575,6 +861,7 @@ class _$ErrorImpl implements _Error {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Loading value)? loading,
     TResult? Function(_Loaded value)? loaded,
+    TResult? Function(_LoadMore value)? loadMore,
     TResult? Function(_Error value)? error,
   }) {
     return error?.call(this);
@@ -586,6 +873,7 @@ class _$ErrorImpl implements _Error {
     TResult Function(_Initial value)? initial,
     TResult Function(_Loading value)? loading,
     TResult Function(_Loaded value)? loaded,
+    TResult Function(_LoadMore value)? loadMore,
     TResult Function(_Error value)? error,
     required TResult orElse(),
   }) {
@@ -596,10 +884,10 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements GetListLoveThemeState {
-  const factory _Error(final Failure failure) = _$ErrorImpl;
+abstract class _Error implements SearchBookState {
+  const factory _Error(final Failure message) = _$ErrorImpl;
 
-  Failure get failure;
+  Failure get message;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

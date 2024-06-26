@@ -24,12 +24,9 @@ class _WelcomePageState extends State<WelcomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image.asset(
-              'assets/images/img_welcome.png',
-              fit: BoxFit.fill,
-            ).toCenter(),
+            Image.asset('assets/images/welcome_image.png'),
             Text(
-              'Read Your\favourite book\nFrom here.',
+              'Read Your\nfavourite book\nFrom here.',
               style: context.headline2TextStyle?.copyWith(
                 color: cMainWhite,
                 fontWeight: FontWeight.w500,

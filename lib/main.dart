@@ -7,10 +7,12 @@ import 'package:aziz_bookstore/presentations/pages/welcome_page/welcome_page.dar
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 
 void main() async {
   await setupLocator();
   httpService.setBaseUrl("https://gutendex.com");
+  Gemini.init(apiKey: "AIzaSyDEr03_hHbEeNeY3JtflR1G4b60kqXgtKs");
 
   runApp(
     MultiBlocProvider(

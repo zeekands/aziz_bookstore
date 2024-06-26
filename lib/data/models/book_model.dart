@@ -56,6 +56,18 @@ class Format {
       applicationOctetStream: json['application/octet-stream'] ?? '',
     );
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'text/html': textHtml,
+      'application/epub+zip': applicationEpubZip,
+      'application/x-mobipocket-ebook': applicationMobipocketEbook,
+      'application/rdf+xml': applicationRdfXml,
+      'image/jpeg': imageJpeg,
+      'text/plain; charset=us-ascii': textPlainCharsetUsAscii,
+      'application/octet-stream': applicationOctetStream,
+    };
+  }
 }
 
 class Book {
@@ -110,6 +122,22 @@ class Book {
             ),
       downloadCount: json['download_count'] ?? 0,
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'subjects': subjects,
+      'authors': authors.map((e) => e.toJson()).toList(),
+      'translators': translators.map((e) => e.toJson()).toList(),
+      'bookshelves': bookshelves,
+      'languages': languages,
+      'copyright': copyright,
+      'media_type': mediaType,
+      'formats': formats.toJson(),
+      'download_count': downloadCount,
+    };
   }
 }
 

@@ -6,3 +6,4 @@ const cMainPurpleLight = Color(0xffF1F1F1);
 const cMainWhite = Color(0xffFFFFFF);
 const cMainBlack = Color(0xff000000);
 const cButtonColor = Color(0xff151E47);
+const cMainBorderColor = Color(0xffE3D4B5);

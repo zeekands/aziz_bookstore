@@ -6,8 +6,8 @@ import 'package:aziz_bookstore/core/extentions/widget_extentions.dart';
 import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/data/models/book_model.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/search_book/search_book_cubit.dart';
-import 'package:aziz_bookstore/presentations/components/item_book.dart';
 import 'package:aziz_bookstore/presentations/components/wave_loading.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -252,12 +252,12 @@ class ItemBookExplore extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: Image.network(
-              book.formats.imageJpeg ?? '',
+            child: CachedNetworkImage(
+              imageUrl: book.formats.imageJpeg,
               height: 150,
               width: 100,
               fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
+              errorWidget: (context, error, stackTrace) {
                 return Container(
                   height: 150,
                   width: 100,
@@ -276,8 +276,8 @@ class ItemBookExplore extends StatelessWidget {
           Builder(
             builder: (context) {
               var languages = "";
-              for (var language in book.languages ?? []) {
-                languages += language ?? "" ", ";
+              for (var language in book.languages) {
+                languages += "$language, ";
               }
               return Container(
                 decoration: BoxDecoration(
@@ -300,7 +300,7 @@ class ItemBookExplore extends StatelessWidget {
           ),
           4.heightBox,
           Text(
-            book.title ?? 'Placeholder',
+            book.title,
             style: context.bodySmallTextStyle?.copyWith(fontWeight: FontWeight.w600, color: cMainBlack),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
@@ -335,7 +335,7 @@ class ItemBookExplore extends StatelessWidget {
               ),
               4.widthBox,
               Text(
-                book.downloadCount.toString() ?? '0',
+                book.downloadCount.toString(),
                 style: context.bodySmallTextStyle
                     ?.copyWith(fontWeight: FontWeight.w400, color: Colors.grey[500], fontSize: 10),
                 maxLines: 1,

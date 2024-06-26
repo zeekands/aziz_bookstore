@@ -1,5 +1,7 @@
+import 'package:aziz_bookstore/core/extentions/navigator_extentions.dart';
 import 'package:aziz_bookstore/core/extentions/theme_extention.dart';
 import 'package:aziz_bookstore/core/extentions/widget_extentions.dart';
+import 'package:aziz_bookstore/core/routes/app_paths.dart';
 import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/core/theme/status_bar_color.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_book_cubit.dart';
@@ -7,6 +9,7 @@ import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_eng_book/get_li
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_love_theme/get_list_love_theme_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_new_release/get_list_new_release_cubit.dart';
 import 'package:aziz_bookstore/presentations/components/item_book.dart';
+import 'package:aziz_bookstore/presentations/components/item_book_with_card.dart';
 import 'package:aziz_bookstore/presentations/components/list_book_home_placeholder.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -124,131 +127,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   for (var book in books.books)
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: cMainWhite,
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: Colors.black.withOpacity(0.1599999964237213),
-                                            blurRadius: 4,
-                                            offset: const Offset(0, 2),
-                                          ),
-                                        ],
-                                      ),
-                                      width: 100,
-                                      margin: const EdgeInsets.only(right: 8),
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius: const BorderRadius.only(
-                                              topLeft: Radius.circular(4),
-                                              topRight: Radius.circular(4),
-                                            ),
-                                            child: Image.network(
-                                              book.formats.imageJpeg,
-                                              height: 150,
-                                              width: 100,
-                                              fit: BoxFit.cover,
-                                              errorBuilder: (context, error, stackTrace) {
-                                                return Container(
-                                                  height: 150,
-                                                  width: 100,
-                                                  color: Colors.grey[300],
-                                                );
-                                              },
-                                            ),
-                                          ),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.start,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: [
-                                              4.heightBox,
-                                              Builder(
-                                                builder: (context) {
-                                                  var languages = "";
-                                                  for (var language in book.languages) {
-                                                    languages += language;
-                                                  }
-                                                  return Container(
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.grey[200],
-                                                      borderRadius: BorderRadius.circular(4),
-                                                    ),
-                                                    padding: const EdgeInsets.symmetric(
-                                                      horizontal: 4,
-                                                    ),
-                                                    child: Text(
-                                                      languages,
-                                                      style: context.bodySmallTextStyle?.copyWith(
-                                                          fontWeight: FontWeight.w400,
-                                                          color: Colors.grey[500],
-                                                          fontSize: 10),
-                                                      maxLines: 1,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.start,
-                                                    ),
-                                                  );
-                                                },
-                                              ),
-                                              4.heightBox,
-                                              Text(
-                                                "${book.title}\n",
-                                                style: context.bodySmallTextStyle
-                                                    ?.copyWith(fontWeight: FontWeight.w600, color: cMainBlack),
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.start,
-                                              ),
-                                              4.heightBox,
-                                              Builder(
-                                                builder: (context) {
-                                                  var authors = "";
-                                                  for (var author in book.authors) {
-                                                    authors += author.name ?? "" ", ";
-                                                  }
-                                                  return Text(
-                                                    authors,
-                                                    style: context.bodySmallTextStyle?.copyWith(
-                                                        fontWeight: FontWeight.w400,
-                                                        color: Colors.grey[500],
-                                                        fontSize: 10),
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.start,
-                                                  );
-                                                },
-                                              ),
-                                              4.heightBox,
-                                              Row(
-                                                mainAxisAlignment: MainAxisAlignment.start,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                children: [
-                                                  Icon(
-                                                    Icons.download,
-                                                    color: Colors.grey[500],
-                                                    size: 13,
-                                                  ),
-                                                  4.widthBox,
-                                                  Text(
-                                                    book.downloadCount.toString(),
-                                                    style: context.bodySmallTextStyle?.copyWith(
-                                                        fontWeight: FontWeight.w400,
-                                                        color: Colors.grey[500],
-                                                        fontSize: 10),
-                                                    maxLines: 1,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.start,
-                                                  ),
-                                                ],
-                                              ),
-                                              4.heightBox,
-                                            ],
-                                          ).paddingSymmetric(horizontal: 4),
-                                        ],
-                                      ),
+                                    ItemBookWithCard(
+                                      book: book,
+                                      onTap: () {
+                                        context.pushNamed(AppPaths.bookDetail, arguments: book);
+                                      },
                                     ),
                                 ],
                               ).paddingSymmetric(horizontal: 8),
@@ -284,7 +167,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (var book in books.books) ItemBook(book: book),
+                            for (var book in books.books)
+                              ItemBook(
+                                  book: book,
+                                  onTap: () {
+                                    context.pushNamed(AppPaths.bookDetail, arguments: book);
+                                  }),
                           ],
                         ),
                       ),
@@ -317,7 +205,12 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (var book in books.books) ItemBook(book: book),
+                            for (var book in books.books)
+                              ItemBook(
+                                  book: book,
+                                  onTap: () {
+                                    context.pushNamed(AppPaths.bookDetail, arguments: book);
+                                  }),
                           ],
                         ),
                       ),
@@ -349,7 +242,13 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            for (var book in books.books) ItemBook(book: book),
+                            for (var book in books.books)
+                              ItemBook(
+                                book: book,
+                                onTap: () {
+                                  context.pushNamed(AppPaths.bookDetail, arguments: book);
+                                },
+                              ),
                           ],
                         ),
                       ),

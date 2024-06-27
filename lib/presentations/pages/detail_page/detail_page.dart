@@ -45,80 +45,7 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
   void didChangeDependencies() {
     super.didChangeDependencies();
     book = ModalRoute.of(context)?.settings.arguments as Book?;
-    gemini.text("search summary of this book ${book?.title} by $book").then((value) {
-      setState(
-        () {
-          summary = value?.content?.parts?.last.text ?? "";
-          _loadSummary = false;
-          if (summary.isEmpty) {
-            summary = "Summary not found";
-          }
-        },
-      );
-    }).catchError(
-      (e) {
-        setState(
-          () {
-            _loadSummary = false;
-            summary = "Summary not found";
-          },
-        );
-      },
-    );
-
-    gemini.text("search biography of ${book?.authors[0].name} ${book?.title}").then((value) {
-      setState(
-        () {
-          authorSummary = value?.content?.parts?.last.text ?? "No author summary found";
-          _loadAuthorSummary = false;
-        },
-      );
-    }).catchError(
-      (e) {
-        setState(
-          () {
-            authorSummary = "Author summary not found";
-            _loadAuthorSummary = false;
-          },
-        );
-      },
-    );
-
-    gemini.text("search genre of ${book?.title} and tell me litle bit about the genre in book genre").then((value) {
-      setState(
-        () {
-          genreOfBook = value?.content?.parts?.last.text ?? "No genre found";
-          _loadGenre = false;
-        },
-      );
-    }).catchError(
-      (e) {
-        setState(
-          () {
-            genreOfBook = "Genre not found";
-            _loadGenre = false;
-          },
-        );
-      },
-    );
-
-    gemini.text("search languages of book ${book?.title} and tell me the release date").then((value) {
-      setState(
-        () {
-          languages = value?.content?.parts?.last.text ?? "No languages found";
-          _loadLanguages = false;
-        },
-      );
-    }).catchError(
-      (e) {
-        setState(
-          () {
-            languages = "Languages not found";
-            _loadLanguages = false;
-          },
-        );
-      },
-    );
+    getSummaryBook();
   }
 
   @override
@@ -629,6 +556,83 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
             ),
         ],
       ).paddingSymmetric(horizontal: 16),
+    );
+  }
+
+  void getSummaryBook() {
+    gemini.text("search summary of this book ${book?.title} by $book").then((value) {
+      setState(
+        () {
+          summary = value?.content?.parts?.last.text ?? "";
+          _loadSummary = false;
+          if (summary.isEmpty) {
+            summary = "Summary not found";
+          }
+        },
+      );
+    }).catchError(
+      (e) {
+        setState(
+          () {
+            _loadSummary = false;
+            summary = "Summary not found";
+          },
+        );
+      },
+    );
+
+    gemini.text("search biography of ${book?.authors[0].name} ${book?.title}").then((value) {
+      setState(
+        () {
+          authorSummary = value?.content?.parts?.last.text ?? "No author summary found";
+          _loadAuthorSummary = false;
+        },
+      );
+    }).catchError(
+      (e) {
+        setState(
+          () {
+            authorSummary = "Author summary not found";
+            _loadAuthorSummary = false;
+          },
+        );
+      },
+    );
+
+    gemini.text("search genre of ${book?.title} and tell me litle bit about the genre in book genre").then((value) {
+      setState(
+        () {
+          genreOfBook = value?.content?.parts?.last.text ?? "No genre found";
+          _loadGenre = false;
+        },
+      );
+    }).catchError(
+      (e) {
+        setState(
+          () {
+            genreOfBook = "Genre not found";
+            _loadGenre = false;
+          },
+        );
+      },
+    );
+
+    gemini.text("search languages of book ${book?.title} and tell me the release date").then((value) {
+      setState(
+        () {
+          languages = value?.content?.parts?.last.text ?? "No languages found";
+          _loadLanguages = false;
+        },
+      );
+    }).catchError(
+      (e) {
+        setState(
+          () {
+            languages = "Languages not found";
+            _loadLanguages = false;
+          },
+        );
+      },
     );
   }
 }

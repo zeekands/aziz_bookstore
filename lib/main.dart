@@ -3,6 +3,7 @@ import 'package:aziz_bookstore/core/routes/app_routes.dart';
 import 'package:aziz_bookstore/core/services/bloc_provider.dart';
 import 'package:aziz_bookstore/core/services/network_service.dart';
 import 'package:aziz_bookstore/core/theme/colors.dart';
+import 'package:aziz_bookstore/data/datasources/local_data_source/db_helper.dart';
 import 'package:aziz_bookstore/presentations/pages/welcome_page/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,9 +11,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
   httpService.setBaseUrl("https://gutendex.com");
+  DatabaseHelper databaseHelper = DatabaseHelper.instance;
   Gemini.init(apiKey: "AIzaSyDEr03_hHbEeNeY3JtflR1G4b60kqXgtKs");
+  databaseHelper.database;
 
   runApp(
     MultiBlocProvider(
@@ -26,6 +30,12 @@ void main() async {
           useMaterial3: true,
           scaffoldBackgroundColor: cMainWhite,
           fontFamily: 'PlusJakartaSans',
+          pageTransitionsTheme: const PageTransitionsTheme(
+            builders: {
+              TargetPlatform.android: CupertinoPageTransitionsBuilder(),
+              TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
+            },
+          ),
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.white,
             elevation: 0,

@@ -1,3 +1,5 @@
+import 'dart:convert'; // Digunakan untuk konversi JSON
+
 class Person {
   int? birthYear;
   int? deathYear;
@@ -18,6 +20,22 @@ class Person {
   }
 
   Map<String, dynamic> toJson() {
+    return {
+      'birth_year': birthYear,
+      'death_year': deathYear,
+      'name': name,
+    };
+  }
+
+  static Person fromMap(Map<String, dynamic> map) {
+    return Person(
+      birthYear: map['birth_year'],
+      deathYear: map['death_year'],
+      name: map['name'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
     return {
       'birth_year': birthYear,
       'death_year': deathYear,
@@ -68,6 +86,30 @@ class Format {
       'application/octet-stream': applicationOctetStream,
     };
   }
+
+  static Format fromMap(Map<String, dynamic> map) {
+    return Format(
+      textHtml: map['text_html'] ?? '',
+      applicationEpubZip: map['application_epub_zip'] ?? '',
+      applicationMobipocketEbook: map['application_mobipocket_ebook'] ?? '',
+      applicationRdfXml: map['application_rdf_xml'] ?? '',
+      imageJpeg: map['image_jpeg'] ?? '',
+      textPlainCharsetUsAscii: map['text_plain_charset_us_ascii'] ?? '',
+      applicationOctetStream: map['application_octet_stream'] ?? '',
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'text_html': textHtml,
+      'application_epub_zip': applicationEpubZip,
+      'application_mobipocket_ebook': applicationMobipocketEbook,
+      'application_rdf_xml': applicationRdfXml,
+      'image_jpeg': imageJpeg,
+      'text_plain_charset_us_ascii': textPlainCharsetUsAscii,
+      'application_octet_stream': applicationOctetStream,
+    };
+  }
 }
 
 class Book {
@@ -102,7 +144,7 @@ class Book {
       id: json['id'] ?? 0,
       title: json['title'] ?? '',
       subjects: json['subjects'] != null ? List<String>.from(json['subjects']) : [],
-      authors: json['authors'] != null ? List<Person>.from(json['authors'].map((e) => Person.fromJson(e))) : [],
+      authors: json['authors'] != null ? List<Person>.from((json['authors']).map((e) => Person.fromJson(e))) : [],
       translators:
           json['translators'] != null ? List<Person>.from(json['translators'].map((e) => Person.fromJson(e))) : [],
       bookshelves: json['bookshelves'] != null ? List<String>.from(json['bookshelves']) : [],
@@ -139,6 +181,38 @@ class Book {
       'download_count': downloadCount,
     };
   }
+
+  static Book fromMap(Map<String, dynamic> map) {
+    return Book(
+      id: map['id'],
+      title: map['title'],
+      subjects: jsonDecode(map['subjects']).cast<String>(),
+      authors: (jsonDecode(map['authors']) as List).map((i) => Person.fromMap(i)).toList(),
+      translators: (jsonDecode(map['translators']) as List).map((i) => Person.fromMap(i)).toList(),
+      bookshelves: jsonDecode(map['bookshelves']).cast<String>(),
+      languages: jsonDecode(map['languages']).cast<String>(),
+      copyright: map['copyright'] == 1,
+      mediaType: map['media_type'],
+      formats: Format.fromMap(jsonDecode(map['formats'])),
+      downloadCount: map['download_count'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'title': title,
+      'subjects': jsonEncode(subjects),
+      'authors': jsonEncode(authors.map((e) => e.toMap()).toList()),
+      'translators': jsonEncode(translators.map((e) => e.toMap()).toList()),
+      'bookshelves': jsonEncode(bookshelves),
+      'languages': jsonEncode(languages),
+      'copyright': copyright == true ? 1 : 0,
+      'media_type': mediaType,
+      'formats': jsonEncode(formats.toMap()),
+      'download_count': downloadCount,
+    };
+  }
 }
 
 class BookList {
@@ -156,5 +230,32 @@ class BookList {
       next: json['next'],
       previous: json['previous'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'books': books.map((book) => book.toJson()).toList(),
+      'count': count,
+      'next': next,
+      'previous': previous,
+    };
+  }
+
+  static BookList fromMap(Map<String, dynamic> map) {
+    return BookList(
+      books: List<Book>.from((jsonDecode(map['books']) as List).map((e) => Book.fromMap(e))),
+      count: map['count'],
+      next: map['next'],
+      previous: map['previous'],
+    );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'books': jsonEncode(books.map((book) => book.toMap()).toList()),
+      'count': count,
+      'next': next,
+      'previous': previous,
+    };
   }
 }

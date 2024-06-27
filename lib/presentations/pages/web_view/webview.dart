@@ -15,8 +15,6 @@ class CustomWebView extends StatefulWidget {
 }
 
 class _CustomWebViewState extends State<CustomWebView> {
-  final String _urlWebview = '';
-
   final GlobalKey webViewKey = GlobalKey();
 
   InAppWebViewController? webViewController;

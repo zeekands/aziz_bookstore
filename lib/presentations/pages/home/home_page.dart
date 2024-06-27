@@ -26,11 +26,9 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin {
   final listBanner = [
-    "assets/images/1.jpg",
-    "assets/images/2.jpg",
-    "assets/images/7.jpg",
-    "assets/images/8.jpg",
-    "assets/images/9.webp",
+    "assets/images/10.webp",
+    "assets/images/11.webp",
+    "assets/images/12.jpg",
   ];
   @override
   void initState() {
@@ -207,10 +205,11 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                           children: [
                             for (var book in books.books)
                               ItemBook(
-                                  book: book,
-                                  onTap: () {
-                                    context.pushNamed(AppPaths.bookDetail, arguments: book);
-                                  }),
+                                book: book,
+                                onTap: () {
+                                  context.pushNamed(AppPaths.bookDetail, arguments: book);
+                                },
+                              ),
                           ],
                         ),
                       ),

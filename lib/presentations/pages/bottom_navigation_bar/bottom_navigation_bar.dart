@@ -1,8 +1,10 @@
 import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/core/theme/status_bar_color.dart';
+import 'package:aziz_bookstore/data/datasources/local_data_source/db_helper.dart';
 import 'package:aziz_bookstore/presentations/components/bottom_navbar.dart';
 import 'package:aziz_bookstore/presentations/pages/explore_page/explore_page.dart';
 import 'package:aziz_bookstore/presentations/pages/home/home_page.dart';
+import 'package:aziz_bookstore/presentations/pages/liked_page/liked_page.dart';
 import 'package:flutter/material.dart';
 
 class BottomNavBarPage extends StatefulWidget {
@@ -26,14 +28,15 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
         children: [
           HomePage(
             goToExplorePage: () {
-              setState(() {
-                _selected = 1;
-              });
+              setState(
+                () {
+                  _selected = 1;
+                },
+              );
             },
           ),
           const ExplorePage(),
-          Container(),
-          Container(),
+          const LikedPage(),
         ],
       ),
       bottomNavigationBar: CustomLineIndicatorBottomNavbar(
@@ -46,6 +49,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
         onTap: (index) {
           setState(() {
             _selected = index;
+            getLikedBooks();
           });
         },
         enableLineIndicator: true,
@@ -64,11 +68,6 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> with AutomaticKeepA
               label: 'Liked',
               icon_active: 'assets/icons/ic_liked_active.svg',
               icon_inactive: 'assets/icons/ic_liked_inactive.svg'),
-          CustomBottomBarItems(
-            label: 'Profile',
-            icon_active: 'assets/icons/ic_profile_active.svg',
-            icon_inactive: 'assets/icons/ic_profile_inactive.svg',
-          ),
         ],
       ),
     );

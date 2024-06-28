@@ -8,6 +8,7 @@ import 'package:aziz_bookstore/core/extentions/widget_extentions.dart';
 import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/data/datasources/local_data_source/db_helper.dart';
 import 'package:aziz_bookstore/data/models/book_model.dart';
+import 'package:aziz_bookstore/presentations/components/sticky_tab_delegate.dart';
 import 'package:aziz_bookstore/presentations/pages/web_view/webview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
@@ -702,27 +703,5 @@ class _LoveIconWidgetState extends State<LoveIconWidget> {
     setState(() {
       _isLiked = !_isLiked;
     });
-  }
-}
-
-class StickyTabDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  StickyTabDelegate({required this.child});
-
-  @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return child;
-  }
-
-  @override
-  double get maxExtent => 45; // Atur tinggi maksimum header di sini
-
-  @override
-  double get minExtent => 45; // Atur tinggi minimum header di sini
-
-  @override
-  bool shouldRebuild(covariant SliverPersistentHeaderDelegate oldDelegate) {
-    return false;
   }
 }

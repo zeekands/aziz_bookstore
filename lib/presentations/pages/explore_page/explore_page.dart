@@ -145,6 +145,23 @@ class _ExplorePageState extends State<ExplorePage> {
                         );
                       },
                       loaded: (listBook) {
+                        if (listBook.books.isEmpty) {
+                          return Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/img_empty_item.png',
+                                height: 300,
+                              ),
+                              Text(
+                                'No result found!',
+                                style: context.titleLargeTextStyle,
+                              ),
+                              8.heightBox,
+                              const Text("Let's find another book!"),
+                            ],
+                          ).toCenter();
+                        }
                         return StaggeredGrid.count(
                           crossAxisCount: 4,
                           mainAxisSpacing: 16,

@@ -20,4 +20,31 @@ class GetListLoveThemeCubit extends Cubit<GetListLoveThemeState> {
       (books) => emit(GetListLoveThemeState.loaded(books)),
     );
   }
+
+  static List<Book> listBooks = <Book>[];
+  static bool hasReachedMax = false;
+
+  void loadMore(page) async {
+    emit(_LoadMore(listBooks, true, false));
+    final result = await _getListBookUsecae.execute(BookRequestModel(topic: "romance", page: page));
+    result.fold(
+      (failure) => emit(_Error(failure)),
+      (data) {
+        if (data.next == null || data.next == "") {
+          listBooks.addAll(data.books);
+          if (data.books.isEmpty) {
+            hasReachedMax = true;
+          }
+          emit(_LoadMore(listBooks, false, hasReachedMax));
+          return;
+        }
+        listBooks.addAll(data.books);
+        emit(_LoadMore(listBooks, false, false));
+      },
+    );
+  }
+
+  void clear() {
+    emit(const _Initial());
+  }
 }

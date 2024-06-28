@@ -4,7 +4,9 @@ import 'package:aziz_bookstore/core/extentions/widget_extentions.dart';
 import 'package:aziz_bookstore/core/routes/app_paths.dart';
 import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/core/theme/status_bar_color.dart';
-import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_book_cubit.dart';
+import 'package:aziz_bookstore/data/models/book_request_model.dart';
+import 'package:aziz_bookstore/data/models/see_all_arguments.dart';
+import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_book/get_list_book_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_eng_book/get_list_eng_book_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_love_theme/get_list_love_theme_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_new_release/get_list_new_release_cubit.dart';
@@ -107,7 +109,15 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                                 style: context.titleMediumTextStyle
                                     ?.copyWith(fontWeight: FontWeight.w600, color: cMainWhite)),
                             const Spacer(),
-                            Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainWhite)),
+                            Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainWhite)).onTap(() {
+                              context.pushNamed(
+                                AppPaths.seeAll,
+                                arguments: SeeAllArguments(
+                                  title: "Romance Books",
+                                  topic: BookRequestModel(topic: "romance"),
+                                ),
+                              );
+                            }),
                           ],
                         ),
                       ),
@@ -148,7 +158,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                     children: [
                       Text('Popular Book', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
                       const Spacer(),
-                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)),
+                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)).onTap(
+                        () {
+                          context.pushNamed(
+                            AppPaths.seeAll,
+                            arguments: SeeAllArguments(
+                              title: "Popular Books",
+                              topic: BookRequestModel(sort: "popular"),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -186,7 +206,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                       Text('Fresh Book For You!',
                           style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
                       const Spacer(),
-                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)),
+                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)).onTap(
+                        () {
+                          context.pushNamed(
+                            AppPaths.seeAll,
+                            arguments: SeeAllArguments(
+                              title: "New Release Books",
+                              topic: BookRequestModel(sort: "descending"),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -224,7 +254,17 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
                     children: [
                       Text('English Book', style: context.titleMediumTextStyle?.copyWith(fontWeight: FontWeight.w600)),
                       const Spacer(),
-                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)),
+                      Text('See All', style: context.bodySmallTextStyle?.copyWith(color: cMainPurple)).onTap(
+                        () {
+                          context.pushNamed(
+                            AppPaths.seeAll,
+                            arguments: SeeAllArguments(
+                              title: "English Books",
+                              topic: BookRequestModel(languange: "en"),
+                            ),
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),

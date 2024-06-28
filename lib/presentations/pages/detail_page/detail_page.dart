@@ -10,6 +10,7 @@ import 'package:aziz_bookstore/data/datasources/local_data_source/db_helper.dart
 import 'package:aziz_bookstore/data/models/book_model.dart';
 import 'package:aziz_bookstore/presentations/components/sticky_tab_delegate.dart';
 import 'package:aziz_bookstore/presentations/pages/web_view/webview.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
@@ -69,17 +70,22 @@ class _DetailPageState extends State<DetailPage> with SingleTickerProviderStateM
               child: Column(
                 children: [
                   16.heightBox,
-                  Container(
-                    height: 250,
-                    width: 175,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        image: NetworkImage(book?.formats.imageJpeg ?? ''),
-                        fit: BoxFit.cover,
-                      ),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                    child: CachedNetworkImage(
+                      imageUrl: book?.formats.imageJpeg ?? '',
+                      height: 250,
+                      width: 175,
+                      fit: BoxFit.cover,
+                      progressIndicatorBuilder: (context, url, progress) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            value: progress.progress,
+                          ),
+                        );
+                      },
                     ),
-                  ).toCenter(),
+                  ),
                   16.heightBox,
                   Text(
                     book?.title ?? '',

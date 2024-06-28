@@ -32,4 +32,26 @@ class BookRequestModel {
       'author_year_end': authorYearEnd ?? "",
     };
   }
+
+  BookRequestModel copyWith({
+    int? page,
+    String? sort,
+    String? topic,
+    String? languange,
+    String? search,
+    bool? copyright,
+    String? mimeType,
+    String? authorYearStart,
+    String? authorYearEnd,
+  }) {
+    return BookRequestModel(
+      page: page ?? this.page,
+      sort: sort ?? this.sort,
+      topic: topic ?? this.topic,
+      languange: languange ?? this.languange,
+      search: search ?? this.search,
+      authorYearStart: authorYearStart ?? this.authorYearStart,
+      authorYearEnd: authorYearEnd ?? this.authorYearEnd,
+    );
+  }
 }

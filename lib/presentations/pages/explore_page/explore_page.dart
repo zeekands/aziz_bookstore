@@ -149,6 +149,9 @@ class _ExplorePageState extends State<ExplorePage> {
                           return Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
+                              SizedBox(
+                                height: context.screenHeight * 0.1,
+                              ),
                               Image.asset(
                                 'assets/images/img_empty_item.png',
                                 height: 300,
@@ -158,7 +161,7 @@ class _ExplorePageState extends State<ExplorePage> {
                                 style: context.titleLargeTextStyle,
                               ),
                               8.heightBox,
-                              const Text("Let's find another book!"),
+                              const Text("Let's explore other books and authors!"),
                             ],
                           ).toCenter();
                         }
@@ -393,6 +396,7 @@ class InitialStateExplore extends StatelessWidget {
         16.heightBox,
         Text(
           'Discover new books and authors',
+          textAlign: TextAlign.center,
           style: context.headline6TextStyle?.copyWith(
             fontWeight: FontWeight.w500,
           ),
@@ -400,6 +404,7 @@ class InitialStateExplore extends StatelessWidget {
         8.heightBox,
         Text(
           'Fill in the search box to find your favourite books and authors',
+          textAlign: TextAlign.center,
           style: context.bodyText1TextStyle?.copyWith(
             fontSize: 12,
           ),

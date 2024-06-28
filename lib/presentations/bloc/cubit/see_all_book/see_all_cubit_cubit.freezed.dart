@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'get_list_love_theme_cubit.dart';
+part of 'see_all_cubit_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
-mixin _$GetListLoveThemeState {
+mixin _$SeeAllCubitState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -81,17 +81,16 @@ mixin _$GetListLoveThemeState {
 }
 
 /// @nodoc
-abstract class $GetListLoveThemeStateCopyWith<$Res> {
-  factory $GetListLoveThemeStateCopyWith(GetListLoveThemeState value,
-          $Res Function(GetListLoveThemeState) then) =
-      _$GetListLoveThemeStateCopyWithImpl<$Res, GetListLoveThemeState>;
+abstract class $SeeAllCubitStateCopyWith<$Res> {
+  factory $SeeAllCubitStateCopyWith(
+          SeeAllCubitState value, $Res Function(SeeAllCubitState) then) =
+      _$SeeAllCubitStateCopyWithImpl<$Res, SeeAllCubitState>;
 }
 
 /// @nodoc
-class _$GetListLoveThemeStateCopyWithImpl<$Res,
-        $Val extends GetListLoveThemeState>
-    implements $GetListLoveThemeStateCopyWith<$Res> {
-  _$GetListLoveThemeStateCopyWithImpl(this._value, this._then);
+class _$SeeAllCubitStateCopyWithImpl<$Res, $Val extends SeeAllCubitState>
+    implements $SeeAllCubitStateCopyWith<$Res> {
+  _$SeeAllCubitStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -108,7 +107,7 @@ abstract class _$$InitialImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$InitialImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$InitialImpl>
+    extends _$SeeAllCubitStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
       _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
@@ -122,7 +121,7 @@ class _$InitialImpl implements _Initial {
 
   @override
   String toString() {
-    return 'GetListLoveThemeState.initial()';
+    return 'SeeAllCubitState.initial()';
   }
 
   @override
@@ -221,7 +220,7 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements GetListLoveThemeState {
+abstract class _Initial implements SeeAllCubitState {
   const factory _Initial() = _$InitialImpl;
 }
 
@@ -234,7 +233,7 @@ abstract class _$$LoadingImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadingImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$LoadingImpl>
+    extends _$SeeAllCubitStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
       _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
@@ -248,7 +247,7 @@ class _$LoadingImpl implements _Loading {
 
   @override
   String toString() {
-    return 'GetListLoveThemeState.loading()';
+    return 'SeeAllCubitState.loading()';
   }
 
   @override
@@ -347,7 +346,7 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements GetListLoveThemeState {
+abstract class _Loading implements SeeAllCubitState {
   const factory _Loading() = _$LoadingImpl;
 }
 
@@ -362,7 +361,7 @@ abstract class _$$LoadedImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadedImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$LoadedImpl>
+    extends _$SeeAllCubitStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
       _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
@@ -392,7 +391,7 @@ class _$LoadedImpl implements _Loaded {
 
   @override
   String toString() {
-    return 'GetListLoveThemeState.loaded(books: $books)';
+    return 'SeeAllCubitState.loaded(books: $books)';
   }
 
   @override
@@ -499,7 +498,7 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements GetListLoveThemeState {
+abstract class _Loaded implements SeeAllCubitState {
   const factory _Loaded(final BookList books) = _$LoadedImpl;
 
   BookList get books;
@@ -519,7 +518,7 @@ abstract class _$$LoadMoreImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$LoadMoreImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$LoadMoreImpl>
+    extends _$SeeAllCubitStateCopyWithImpl<$Res, _$LoadMoreImpl>
     implements _$$LoadMoreImplCopyWith<$Res> {
   __$$LoadMoreImplCopyWithImpl(
       _$LoadMoreImpl _value, $Res Function(_$LoadMoreImpl) _then)
@@ -571,7 +570,7 @@ class _$LoadMoreImpl implements _LoadMore {
 
   @override
   String toString() {
-    return 'GetListLoveThemeState.loadMore(moreBooks: $moreBooks, showLoading: $showLoading, hasReachedMax: $hasReachedMax)';
+    return 'SeeAllCubitState.loadMore(moreBooks: $moreBooks, showLoading: $showLoading, hasReachedMax: $hasReachedMax)';
   }
 
   @override
@@ -687,7 +686,7 @@ class _$LoadMoreImpl implements _LoadMore {
   }
 }
 
-abstract class _LoadMore implements GetListLoveThemeState {
+abstract class _LoadMore implements SeeAllCubitState {
   const factory _LoadMore(final List<Book> moreBooks, final bool showLoading,
       final bool hasReachedMax) = _$LoadMoreImpl;
 
@@ -710,7 +709,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
 
 /// @nodoc
 class __$$ErrorImplCopyWithImpl<$Res>
-    extends _$GetListLoveThemeStateCopyWithImpl<$Res, _$ErrorImpl>
+    extends _$SeeAllCubitStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
       _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
@@ -740,7 +739,7 @@ class _$ErrorImpl implements _Error {
 
   @override
   String toString() {
-    return 'GetListLoveThemeState.error(failure: $failure)';
+    return 'SeeAllCubitState.error(failure: $failure)';
   }
 
   @override
@@ -847,7 +846,7 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements GetListLoveThemeState {
+abstract class _Error implements SeeAllCubitState {
   const factory _Error(final Failure failure) = _$ErrorImpl;
 
   Failure get failure;

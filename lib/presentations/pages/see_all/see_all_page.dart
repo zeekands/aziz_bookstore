@@ -52,25 +52,11 @@ class _SeeAllPageState extends State<SeeAllPage> {
   @override
   void initState() {
     super.initState();
-    _scrollController.addListener(
-      () {
-        if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
-          setState(() {
-            _hasReachBottom = true;
-          });
-          if (!_isPageLoading) {
-            _page++;
-            context.read<SeeAllCubitCubit>().loadMore(
-                  argumentsData.topic!,
-                  _page,
-                );
-          }
-          _isPageLoading = true;
-        } else {
-          _hasReachBottom = false;
-        }
-      },
-    );
+  }
+
+  @override
+  void didUpdateWidget(covariant SeeAllPage oldWidget) {
+    super.didUpdateWidget(oldWidget);
   }
 
   @override

@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:aziz_bookstore/core/extentions/navigator_extentions.dart';
+import 'package:aziz_bookstore/core/extentions/scaffold_extentions.dart';
 import 'package:aziz_bookstore/core/extentions/theme_extention.dart';
 import 'package:aziz_bookstore/core/extentions/widget_extentions.dart';
 import 'package:aziz_bookstore/core/routes/app_paths.dart';
@@ -6,6 +9,7 @@ import 'package:aziz_bookstore/core/theme/colors.dart';
 import 'package:aziz_bookstore/core/theme/status_bar_color.dart';
 import 'package:aziz_bookstore/data/models/book_request_model.dart';
 import 'package:aziz_bookstore/data/models/see_all_arguments.dart';
+import 'package:aziz_bookstore/main.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_book/get_list_book_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_eng_book/get_list_eng_book_cubit.dart';
 import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_love_theme/get_list_love_theme_cubit.dart';
@@ -13,6 +17,7 @@ import 'package:aziz_bookstore/presentations/bloc/cubit/get_list_new_release/get
 import 'package:aziz_bookstore/presentations/components/item_book.dart';
 import 'package:aziz_bookstore/presentations/components/item_book_with_card.dart';
 import 'package:aziz_bookstore/presentations/components/list_book_home_placeholder.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,10 +52,9 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin 
     darkStatusBar();
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.menu),
-          onPressed: () {},
-        ),
+        leading: const CircleAvatar(
+          backgroundImage: CachedNetworkImageProvider("https://randomuser.me/api/portraits/lego/1.jpg"),
+        ).paddingSymmetric(horizontal: 8, vertical: 8),
         title: Text('Bookstore', style: context.titleLargeTextStyle?.copyWith(fontWeight: FontWeight.w700)),
         actions: [
           IconButton(

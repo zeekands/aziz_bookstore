@@ -11,6 +11,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 
+final GlobalKey<ScaffoldState> key = GlobalKey();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await setupLocator();
@@ -23,6 +25,7 @@ void main() async {
       providers: BlocProviders.getproviders,
       child: MaterialApp(
         title: 'Flutter Demo',
+        key: key,
         debugShowCheckedModeBanner: false,
         routes: appRoutes,
         theme: ThemeData(

@@ -22,3 +22,10 @@ This project is a starting point for a Flutter application.
 3. If there is error occured, try to clean the project with : flutter clean and run flutter pub get again
 4. Run the project with android studio(android) or xcode (ios)
    
+## Dependency and Packages
+- Flutter Bloc
+- GetIt
+- Sqflite
+- CachedNetworkImage
+- CaraouselSlider
+- Dartz
